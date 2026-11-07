@@ -166,5 +166,5 @@ No interview findings have been claimed in this document.
 - Read the full research papers and relevant NISR report sections.
 - Check the actual NISR dataset variables and access conditions.
 - Investigate the existing e-HingiriSoko platform further.
-- Conduct a stakeholder interview when available.
+- Conduct a stakeholder interview when available
 - Refine the problem statement and proposed database requirements.
