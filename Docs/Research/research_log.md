@@ -3,168 +3,56 @@
 **Project:** Cooperative Stock Reconciliation and Post-Harvest Loss Monitoring System  
 **Researcher:** JABO Ghislain  
 **Student ID:** 20252SEN163  
-**Prepared:** 7 November 2026  
-**Status:** Initial desk research; field validation pending.
+**Course:** Database Development with PL/SQL (INSY 8311)  
+**Research status:** Desk research completed for proposal drafting; cooperative workflow remains a hypothetical design scenario.
 
-## 1. Research Objective
+> **Integrity note:** No cooperative interview has been conducted. User roles and workflow requirements are assumptions for an academic prototype, not statements attributed to a real cooperative. Read the cited source before using a finding in a graded presentation or defence.
 
-The purpose of this research is to understand agricultural post-harvest losses, storage practices, existing agricultural digital systems, and relevant technologies for developing HarvestLink Rwanda.
+## Source evaluation table
 
-The research will also help identify a practical gap that can be addressed by an Oracle database system.
+| # | Source (APA) | Type | Link | Key finding | Gap / relevance to HarvestLink |
+|---|---|---|---|---|---|
+| 1 | Benimana, G. U., Ritho, C., & Irungu, P. (2021). Assessment of factors affecting the decision of smallholder farmers to use alternative maize storage technologies in Gatsibo District-Rwanda. *Heliyon, 7*(10), e08235. https://doi.org/10.1016/j.heliyon.2021.e08235 | Peer-reviewed research paper | https://pmc.ncbi.nlm.nih.gov/articles/PMC8561309/ | Surveyed 301 smallholder maize farmers in Gatsibo; the paper reports that 41% used hermetic storage technology and discusses factors associated with storage-technology choice. | Supports the importance of storage practices and post-harvest-loss prevention in Rwanda. It studies household/farmer technology adoption, not cooperative warehouse ledgers or stock reconciliation. |
+| 2 | Sheahan, M., & Barrett, C. B. (2017). Review: Food loss and waste in Sub-Saharan Africa. *Food Policy, 70*, 1–12. https://doi.org/10.1016/j.foodpol.2017.03.012 | Peer-reviewed literature review | https://pmc.ncbi.nlm.nih.gov/articles/PMC5555439/ | Reviews objectives, estimates and measurement methods for post-harvest food loss and waste in Sub-Saharan Africa, and discusses limitations in how loss estimates are produced. | Provides regional context and warns that loss measurement requires careful methods. It does not describe the day-to-day stock-control practices of a specific Rwandan cooperative. |
+| 3 | National Institute of Statistics of Rwanda. (2024). *Seasonal Agricultural Survey — Season B, 2024*. https://gis.statistics.gov.rw/statistical-publications/agriculture-environment/seasonal-agricultural-survey-season-b-2024 | Official report / statistics | https://gis.statistics.gov.rw/statistical-publications/agriculture-environment/seasonal-agricultural-survey-season-b-2024 | The Season B survey covered all 30 districts; NISR reports 1,200 segments and 384 large-scale farmers for the survey. The reference period was March–June 2024. | Gives current national agricultural context and coverage. National survey statistics are not a substitute for a cooperative's own warehouse transaction records. |
+| 4 | UGAMA. (n.d.). *Coops DMS — Cooperatives Digital Management and Monitoring System*. https://ugama.org.rw/cdms/ | Existing system | https://ugama.org.rw/cdms/ | The public description lists cooperative book/management functions and asset and inventory management, including stores and products; it also lists sales, purchases and financial management. | This is an existing Rwandan system in the same broad area. HarvestLink must not claim to be the first cooperative inventory system. Its academic scope is narrower: auditable receipts/movements, physical-count variance review and loss analysis. The public page does not establish whether every proposed workflow is already supported, so the distinction is a scope choice, not a proven product gap. |
+| 5 | National Institute of Statistics of Rwanda. (2026). *Season B: Crop Production* [Dataset]. Data Sharing Platform. Retrieved November 7, 2026, from https://data.gov.rw/datasets/eb96d559-71aa-430e-b00c-09da8fbeaf1a | Dataset | https://data.gov.rw/datasets/eb96d559-71aa-430e-b00c-09da8fbeaf1a | The dataset describes plot-level production for Season B (March–June 2024), including crop, harvested/remaining quantities, utilization, storage and post-harvest losses by cause. NISR's microdata data dictionary lists 35,584 cases and 97 variables for the Season B production file. | Real Rwanda data with more than a few hundred cases and relevant agricultural fields. It is plot/household survey data, not a cooperative transaction ledger and does not provide warehouse stock movements or physical counts. Use only appropriate non-identifying fields; cite NISR; do not redistribute the raw file without permission. |
+| 6 | Oracle. (2024). *Oracle Database PL/SQL Language Reference* (21c), F31827-07. https://docs.oracle.com/en/database/oracle/oracle-database/21/lnpls/index.html | Technical source | https://docs.oracle.com/en/database/oracle/oracle-database/21/lnpls/index.html | Official Oracle 21c reference documents PL/SQL subprograms, triggers, packages, error handling and related language features. | Provides the authoritative technical basis for implementing stock rules, validations and audit behaviour in PL/SQL. |
+| 7 | Microsoft. (n.d.). *Oracle database connector*. Microsoft Learn. Retrieved November 7, 2026, from https://learn.microsoft.com/en-us/power-query/connectors/oracle-database | Technical source | https://learn.microsoft.com/en-us/power-query/connectors/oracle-database | Microsoft documents an Oracle connector for Power BI/Power Query, supported Oracle versions, connection modes and required client/provider setup. | Supports the proposed Power BI analytics layer. A working connection on the student's Windows/Power BI setup must still be tested; documentation does not prove the local environment is configured. |
+| 8 | National Institute of Statistics of Rwanda. (2025). *Microdata Release Policy*. https://statistics.gov.rw/publications/microdata-release-policy | Data governance / reuse policy | https://statistics.gov.rw/publications/microdata-release-policy | NISR describes conditions for releasing anonymized microdata for research while protecting respondent confidentiality. NISR's general website also states that data and analysis are CC BY 4.0 unless otherwise indicated. | Dataset-specific conditions still apply. The Season B Data Sharing Platform page says to cite the dataset and not redistribute it without permission. Use the official download for analysis only; do not commit the raw data to the public GitHub repository. |
 
-## 2. Research Sources
+## Dataset suitability and use plan
 
-### Source 1 — Research Paper
+**Selected candidate:** NISR Season B: Crop Production, from the 2023/2024 Seasonal Agricultural Survey.
 
-**APA reference:**
+**Size:** NISR's microdata catalogue lists 35,584 cases and 97 variables for `Rwa_raw_SeasonB2024_Production`. The Data Sharing Platform page displays 98 columns. This metadata difference must be reconciled against the downloaded CSV/data dictionary before data cleaning and normalization.
 
-Benimana, G. U., Ritho, C., & Irungu, P. (2021). Assessment of factors affecting the decision of smallholder farmers to use alternative maize storage technologies in Gatsibo District-Rwanda. Heliyon, 7(10), e08235.
+**Relevant variable families:** crop name/category; harvested and remaining quantity; quantity stored; storage facility; quantity stored in public storage; and loss quantities associated with different post-harvest stages, including transport and storage. Use the official data dictionary to verify each variable label before mapping it to a database column.
 
-https://doi.org/10.1016/j.heliyon.2021.e08235
+**How it will be used:** load a permitted, minimized subset of non-identifying agricultural variables into a staging/reference area for agricultural analysis and crop/loss reporting. Do not use farmer identifiers, names or other identifying fields in the dashboard. The source does not contain daily cooperative receipts, stock transfers or physical-count records.
 
-**Key finding:** The study examined storage technology choices among 301 smallholder maize farmers in Gatsibo District. It identified factors such as farmer-group membership, access to credit, training and production quantity.
+**Operational demonstration data:** if test transactions are required to exercise receipt, transfer, count and reconciliation procedures, they must be labelled `SYNTHETIC_TEST_DATA` and kept separate from the NISR observations. Never describe synthetic rows as measured cooperative records. The instructor should confirm that this combination satisfies the project's real-data requirement; if not, obtain an approved transaction dataset or redesign the scope around the NISR survey variables.
 
-**Relevance:** Helps explain the importance of storage practices and farmer groups in reducing post-harvest losses.
+**Reuse conditions:** NISR's Season B dataset page states that the dataset may be reused and cited in research publications, and separately instructs users not to redistribute the data without permission. Cite the original NISR source and keep the raw file out of the public repository.
 
-**Limitation:** Focuses on maize storage technology adoption rather than cooperative inventory records or stock reconciliation.
+## Research gap and project positioning
 
-### Source 2 — Research Review
+The papers and NISR survey support the importance of measuring storage and post-harvest losses. UGAMA's Coops DMS already publicly lists broad cooperative inventory-management functions. Therefore HarvestLink is positioned as a small academic prototype concentrating on the audit trail from produce receipt to stock movement, loss recording, periodic physical count and manager-reviewed variance. The public sources do not prove that cooperatives widely experience the specific recordkeeping issues assumed in this prototype, nor do they prove that existing platforms lack these features.
 
-**APA reference:**
+## Assumptions requiring instructor or stakeholder validation
 
-Sheahan, M., & Barrett, C. B. (2017). Review: Food loss and waste in Sub-Saharan Africa. Food Policy, 70, 1–12.
+1. A storekeeper records each produce receipt and stock movement.
+2. A cooperative may need to compare its calculated stock balance with a later physical count.
+3. A cooperative manager may review and authorize inventory adjustments.
+4. Loss records can be categorized by crop, date, quantity and cause.
+5. Management may benefit from monthly stock, loss and variance summaries.
 
-https://doi.org/10.1016/j.foodpol.2017.03.012
+These are design assumptions, not interview findings or national prevalence claims.
 
-**Key finding:** The review discusses post-harvest losses across different stages of agricultural value chains and highlights challenges in measuring and assessing losses.
+## Next research actions
 
-**Relevance:** Provides broader context for understanding post-harvest losses and why accurate measurement matters.
-
-**Limitation:** Covers Sub-Saharan Africa generally rather than the specific inventory practices of Rwandan cooperatives.
-
-### Source 3 — Additional Research Paper
-
-**APA reference:**
-
-Benimana, G. U., Ritho, C., & Irungu, P. (2023). Impact of adopting maize hermetic storage technologies on smallholder farmers' income in Gatsibo District, Rwanda. Heliyon, 9(3), e14592.
-
-https://doi.org/10.1016/j.heliyon.2023.e14592
-
-**Key finding:** The study reports a positive and significant income impact among farmers who adopted hermetic maize storage technologies.
-
-**Relevance:** Supports investigation of how improved storage practices relate to agricultural outcomes.
-
-**Limitation:** Focuses on storage technology and farmer income, not cooperative stock reconciliation. Its sample may overlap with the 2021 study and should be checked.
-
-### Source 4 — Official Agricultural Statistics Report
-
-**APA reference:**
-
-National Institute of Statistics of Rwanda. (2024). Seasonal Agricultural Survey — Season B, 2024.
-
-https://www.statistics.gov.rw/statistical-publications/agriculture-environment/seasonal-agricultural-survey-season-b-2024
-
-**Key finding:** The survey covered all 30 districts of Rwanda and collected information from 1,200 segments and 384 large-scale farmers.
-
-**Relevance:** Provides official national agricultural context for the project.
-
-**Limitation:** National agricultural statistics do not directly describe the stock-management procedures of an individual cooperative.
-
-### Source 5 — Existing Agricultural Digital System
-
-**APA reference:**
-
-e-HingiriSoko. (n.d.). e-HingiriSoko: Digital markets ecosystem platform.
-
-https://ehingirisoko.digital/
-
-**Key finding:** The platform describes services for farmer digitization, market linkages, agricultural information, aggregation, trading and data collection.
-
-**Relevance:** Helps identify existing digital agricultural services and avoid duplicating a broad agricultural marketplace.
-
-**Potential distinction:** HarvestLink will focus specifically on cooperative inventory records, stock reconciliation and post-harvest loss monitoring.
-
-**Limitation:** Its public website does not establish whether it already supports our exact proposed workflow.
-
-### Source 6 — Dataset
-
-**APA reference:**
-
-National Institute of Statistics of Rwanda. (2026). Season B: Crop Production [Dataset]. Data Sharing Platform.
-
-https://data.gov.rw/datasets/eb96d559-71aa-430e-b00c-09da8fbeaf1a
-
-**Related microdata catalogue:**
-
-https://www.microdata.statistics.gov.rw/index.php/catalog/113
-
-**Key information:** The dataset includes crop types, harvested quantities, production utilization, storage and post-harvest losses.
-
-The microdata catalogue reports 35,584 cases and 97 variables for the Season B production file.
-
-**Relevance:** May support agricultural context and analysis of crop production and reported post-harvest losses.
-
-**Limitation:** It is plot-level survey data, not a cooperative inventory transaction database. It does not directly provide the physical stock counts and stock movements needed to demonstrate reconciliation.
-
-**Data-use note:** The data-sharing platform requires citation and prohibits redistribution without permission. Do not upload the raw dataset to this public repository unless permission is obtained.
-
-### Source 7 — Oracle Technical Documentation
-
-**APA reference:**
-
-Oracle. (2024). Oracle Database PL/SQL Language Reference (21c).
-
-https://docs.oracle.com/en/database/oracle/oracle-database/21/lnpls/index.html
-
-**Key information:** Official documentation covering PL/SQL programming, stored subprograms, triggers, packages and error handling.
-
-**Relevance:** Supports the technical implementation of the project's database logic.
-
-### Source 8 — Power BI Technical Documentation
-
-**APA reference:**
-
-Microsoft. (n.d.). Oracle database connector. Microsoft Learn. Retrieved November 7, 2026, from
-
-https://learn.microsoft.com/en-us/power-query/connectors/oracle-database
-
-**Key information:** Explains how Power Query and Power BI connect to Oracle databases, including prerequisites and connection methods.
-
-**Relevance:** Supports implementation of the planned Power BI analytics dashboard connected to Oracle.
-
-## 3. Preliminary Research Observations
-
-The reviewed sources show that:
-
-1. Post-harvest losses and storage practices are important agricultural research topics in Rwanda.
-2. Improved storage technologies can have positive agricultural and economic outcomes.
-3. Rwanda already has digital agricultural platforms offering market and farmer services.
-4. NISR provides useful agricultural survey data for research and analysis.
-5. Oracle PL/SQL and Power BI provide suitable technical documentation for the planned implementation.
-
-## 4. Research Gap to Investigate
-
-The reviewed sources do not yet establish how a particular agricultural cooperative records received produce, monitors internal stock movements, compares recorded quantities with physical stock, or documents losses.
-
-This is the gap that needs further investigation before the final problem statement is confirmed.
-
-## 5. Field Research Pending
-
-A stakeholder interview is still needed to investigate:
-
-- How produce is received and recorded.
-- How stock movements are tracked.
-- How physical stock counts are conducted.
-- Whether stock differences occur and how they are handled.
-- How post-harvest losses are documented.
-- Which reports cooperative staff need.
-
-No interview findings have been claimed in this document.
-
-## 6. Next Research Actions
-
-- Read the full research papers and relevant NISR report sections.
-- Check the actual NISR dataset variables and access conditions.
-- Investigate the existing e-HingiriSoko platform further.
-- Conduct a stakeholder interview when available
-- Refine the problem statement and proposed database requirements.
+- Download the official NISR CSV and data dictionary directly from the Data Sharing Platform / NISR catalogue.
+- Check the exact number of rows, variables, missing values, units and permitted variables.
+- Confirm with the instructor that the NISR agricultural dataset plus separately labelled synthetic operational test data is acceptable for the warehouse workflow.
+- Keep the source file private in the working environment unless redistribution permission is granted.
+- Revise the project scope if instructor feedback identifies overlap with Coops DMS or the already-registered class topics.
