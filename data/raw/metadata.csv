@@ -1,0 +1,99 @@
+column_name,data_type,description
+id,INT,Primary Key
+Segment_ID,INT,IDQUEST
+s1q1,VARCHAR,Province
+s1q2,VARCHAR,District name & code
+s1q3,VARCHAR,Stratum
+s1q4,SMALLINT,Segment/LSF Number
+s1q6,SMALLINT,Farmer ID/LSF ID
+s1q7,VARCHAR,Farmer/LSF type
+s1q8,VARCHAR,Gender
+s1q9,DOUBLE,Age
+s1q14,VARCHAR,Did the farmer respond him/herself?
+s2q1,SMALLINT,Plot No
+s1q17,VARCHAR,Relationship of respondent to the farmer
+s1q17_o,VARCHAR,Other Relationship of respondent to the farmer
+s2q2,DOUBLE,Plot area(sqm)
+s2q3,SMALLINT,Number of main crops to be surveyed on during this agricultural season in the plot.
+s2q4,VARCHAR,Crop name
+s2q4_o,VARCHAR,Crop name (specify)
+CropCategory,VARCHAR,Crop name
+s2q5,DOUBLE,Number of plants in this plot (for perennial crops)
+s2q6,DOUBLE,Number of plants to be harvested in this agricultural season (for perennial crops)
+s2q7,VARCHAR,Sowing date
+s2q8,VARCHAR,Expected period for crop harvesting
+s2q9,VARCHAR,Did you use improved seed for this crop in any of your plots in this season?
+s2q10,VARCHAR,Where did improved seeds sown come from?
+s2q10_o,VARCHAR,"Where did improved seeds sown come from?, (specify)"
+s2q11,VARCHAR,Type of seeds sown in this plot
+s2q12,VARCHAR,Is the seed sown in this plot for the current season?
+s2q13_1,VARCHAR,Unit of traditional seeds
+s2q13_2,DOUBLE,Quantity Sown
+s2q14,DOUBLE,Quantity of traditional seeds purchased and sown in the plot
+s2q15,DOUBLE,Amount spent for the purchase of traditional seeds for this plot (Rwf)
+s2q16_1,VARCHAR,Unit of improved seeds
+s2q16_2,DOUBLE,Quantity Sown
+s2q17,DOUBLE,Quantity of improved seeds purchased and sown in this plot
+s2q18,DOUBLE,Amount spent for the purchase of improved seeds sown in this plot(Rwf)
+s2q19_1,VARCHAR,Unit of measurement
+s2q19_2,DOUBLE,Quantity already harvested in measurement unit
+s2q19_3,DOUBLE,Quantity already harvested (in Kg)
+s2q20_1,DOUBLE,Remaining quantity to be harvested in measurement unit
+s2q20_2,DOUBLE,Remaining quantity to be harvested(in Kg)
+s2q21,DOUBLE,Total quantity of harvest for this season (in Kg)
+s2q22,DOUBLE,Total quantity of harvest for this crop during the current season (Kg)
+s2q23,VARCHAR,Compare the production of this crop with its production in the same last season
+s2q24_a,VARCHAR,Explanation1
+s2q24_b,VARCHAR,Explanation2
+s2q24_c,VARCHAR,Explanation3
+s2q25,DOUBLE,Qty of production transformed/to be transformed (Kg)
+s2q25_1,DOUBLE,Qty transformed & used as food
+s2q25_2,DOUBLE,Qty transformed & used as drink
+s2q25_3,DOUBLE,Qty transformed & used in other way
+s2q26,DOUBLE,Qty of production that has been sold/to be sold?(Kg)
+s2q27,VARCHAR,On which market this crop was sold?
+s2q28,DOUBLE,What was the selling price per kilogram? (Rwf/Kg)
+s2q29,DOUBLE,Qty that has been used/to be used by the household (auto consumption)?
+s2q30,DOUBLE,Qty of production used/to be used as wage for hired labour? (Kg)
+s2q31,DOUBLE,Qty of production used /to be used as farm rent? (Kg)
+s2q32,DOUBLE,Qty of production offered/to be offered as a gift?(Kg)
+s2q33,DOUBLE,Q.2.33 Qty of production exchanged/ to be exchanged with other things? (Kg)
+s2q34,DOUBLE,Qty of production used/to be used as seeds?(Kg)
+s2q35,DOUBLE,Qty of production used/to be used as fodder?(Kg)
+s2q36,DOUBLE,Qty of production stored/to be stored(Kg)
+s2q37,VARCHAR,What is the storage facility used during this agricultural season?
+s2q38,DOUBLE,Quantity of production stored in public storage (kg)
+s2q39,DOUBLE,Qty of this crop what is the quantity that has been lost?
+s2q40,DOUBLE,Qty of production used/to be used in any other way not mentioned before?
+s2q41,DOUBLE,Qty of crop stollen at farm level? (kg)
+s2q42,DOUBLE,Qty of crop damaged by insects or pests at farm level? (kg)
+s2q43,DOUBLE,Qty of crop lost due to birds or other animals? (kg)
+s2q44,DOUBLE,Qty of crop’s stalks fallen to the ground? (kg)
+s2q45,DOUBLE,Qty of crop lost during harvesting procedures? (kg)
+s2q46,DOUBLE,Qty of crop production lost in the transport of produce?(kg)
+s2q47,DOUBLE,Qty of crop production lost during storage procedures?
+s2q48,DOUBLE,Qty lost during harvest processing? (kg)
+s2q49,DOUBLE,Qty of harvest lost during packaging? (kg)
+s2q50,DOUBLE,Qty of harvest lost at sales? (kg)
+s3q1,VARCHAR,Did you use organic fertilizer in any of your plots during this season?
+s3q3,VARCHAR,Have you used organic fertilizer in this plot during this season?
+s3q7,VARCHAR,Did you use inorganic fertilizer in any of your plots during this season?
+s3q9,VARCHAR,Have you used inorganic fertilizer in this plot during this season?
+s3q16,VARCHAR,Did you use any type of micro-nutrients in any of your plots in this season
+s3q17,VARCHAR,Did you use any type of micro-nutrients in this plot during this season?
+s3q18,VARCHAR,Did you use pesticide/Fungicide in any of your plots during this season?
+s3q19,VARCHAR,Have you used pesticide/Fungicide in this plot during this current season?
+s4q1,VARCHAR,What is the degree of erosion on this plot?
+s4q2,VARCHAR,Is there any anti-erosion activity in any of your plots?
+s4q3,VARCHAR,Is there any anti-erosion activity on this plot?
+s4q4,VARCHAR,Were these anti-erosion activities done during the current agricultural season?
+s4q6,VARCHAR,Is this plot located in land consolidated site in this season?
+s4q8,VARCHAR,Did you use any mechanical equipment for agriculture activities in any of your plots during this agricultural season?
+s4q9,VARCHAR,Did you use any mechanical equipment for agriculture activities on this plot during this agricultural season?
+s4q10_1,VARCHAR,Have you used ploughing animals (oxen) in this plot during this season?
+s4q11_1,VARCHAR,Have you used a ploughing tractor in this plot during this season?
+s4q12_1,VARCHAR,Have you used any other mechanical equipment not mentioned in this plot during this season?
+s4q14,VARCHAR,Did you practice irrigation in any of your plots during this agricultural season?
+s4q15,VARCHAR,Has this plot been irrigated during this agricultural season?
+s5q12,VARCHAR,Date of interview
+plot_weight,DOUBLE,plot_weight
